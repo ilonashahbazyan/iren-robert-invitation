@@ -9,14 +9,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-/* =====================================================
-   BASE
-===================================================== */
 
 * {
     margin: 0;
@@ -65,9 +60,7 @@ button {
 .reveal {
     opacity: 0;
     transform: translateY(45px);
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
+    transition: opacity 1s ease, transform 1s ease;
 }
 
 .reveal.visible {
@@ -76,21 +69,16 @@ button {
 }
 
 
-/* =====================================================
-   ENVELOPE
-===================================================== */
+/* ================= ENVELOPE ================= */
 
 .envelope-screen {
     position: fixed;
     inset: 0;
-
     width: 100%;
     height: 100svh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     z-index: 9999;
 
     background:
@@ -101,9 +89,7 @@ button {
             #dacbbc 100%
         );
 
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
+    transition: opacity 1s ease, visibility 1s ease;
 }
 
 .envelope-screen.disappear {
@@ -120,65 +106,37 @@ button {
 
 .envelope {
     position: relative;
-
     width: 100%;
     aspect-ratio: 1.58 / 1;
-
     cursor: pointer;
     transform-style: preserve-3d;
-
-    filter:
-        drop-shadow(
-            0 30px 30px
-            rgba(66, 42, 32, .18)
-        );
+    filter: drop-shadow(0 30px 30px rgba(66,42,32,.18));
 }
 
 .envelope-back {
     position: absolute;
     inset: 0;
-
     border-radius: 5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e9ded0,
-            #d9c9b7
-        );
+    background: linear-gradient(135deg,#e9ded0,#d9c9b7);
 }
-
-
-/* invitation card */
 
 .card {
     position: absolute;
-
     width: 88%;
     height: 88%;
-
     left: 6%;
     bottom: 5%;
-
     z-index: 2;
-
     background: #fbf7f0;
-
-    border:
-        1px solid
-        rgba(100, 75, 60, .15);
+    border: 1px solid rgba(100,75,60,.15);
 
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
 
     transform: translateY(13%);
-
-    transition:
-        transform 1.3s
-        cubic-bezier(.22,.8,.2,1);
+    transition: transform 1.3s cubic-bezier(.22,.8,.2,1);
 }
 
 .card-small {
@@ -192,7 +150,7 @@ button {
 .card h2 {
     font-family: "Italiana", serif;
     font-weight: 400;
-    font-size: clamp(35px, 7vw, 66px);
+    font-size: clamp(35px,7vw,66px);
 }
 
 .card-date {
@@ -201,110 +159,59 @@ button {
     font-style: italic;
 }
 
-
-/* envelope front */
-
 .envelope-front {
     position: absolute;
     inset: 0;
-
     z-index: 4;
-
     overflow: hidden;
-
     border-radius: 5px;
 }
 
 .envelope-front::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: #ebe1d5;
-
-    clip-path:
-        polygon(
-            0 0,
-            50% 56%,
-            100% 0,
-            100% 100%,
-            0 100%
-        );
+    clip-path: polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);
 }
 
 .envelope-front::after {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: #dfd0bf;
-
-    clip-path:
-        polygon(
-            0 100%,
-            50% 48%,
-            100% 100%
-        );
+    clip-path: polygon(0 100%,50% 48%,100% 100%);
 }
-
-
-/* envelope flap */
 
 .envelope-flap {
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 58%;
-
     z-index: 6;
-
     transform-origin: top;
     transform-style: preserve-3d;
-
-    transition:
-        transform 1s
-        cubic-bezier(.4,0,.2,1);
+    transition: transform 1s cubic-bezier(.4,0,.2,1);
 }
 
 .envelope-flap::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: #d7c6b3;
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            50% 100%
-        );
-
+    clip-path: polygon(0 0,100% 0,50% 100%);
     backface-visibility: hidden;
 }
 
-
-/* wax seal */
-
 .seal {
     position: absolute;
-
     z-index: 10;
-
     width: 72px;
     height: 72px;
-
     left: 50%;
     top: 49%;
-
-    transform: translate(-50%, -50%);
-
+    transform: translate(-50%,-50%);
     border-radius: 50%;
 
     background:
@@ -324,15 +231,10 @@ button {
     font-size: 22px;
 
     box-shadow:
-        inset 0 0 0 3px
-        rgba(255,255,255,.08),
+        inset 0 0 0 3px rgba(255,255,255,.08),
+        0 5px 12px rgba(60,30,20,.3);
 
-        0 5px 12px
-        rgba(60,30,20,.3);
-
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
+    transition: opacity .5s ease, transform .5s ease;
 }
 
 .envelope.open .envelope-flap {
@@ -341,10 +243,7 @@ button {
 
 .envelope.open .seal {
     opacity: 0;
-
-    transform:
-        translate(-50%, -50%)
-        scale(.6);
+    transform: translate(-50%,-50%) scale(.6);
 }
 
 .envelope.open .card {
@@ -353,46 +252,29 @@ button {
 
 .tap {
     margin-top: 45px;
-
     font-family: "Montserrat", sans-serif;
-
     text-transform: uppercase;
     letter-spacing: 4px;
-
     font-size: 9px;
-
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
-        opacity: .35;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    0%,100% { opacity:.35; }
+    50% { opacity:1; }
 }
 
 
-/* =====================================================
-   HERO
-===================================================== */
+/* ================= HERO ================= */
 
 .hero {
     position: relative;
-
     height: 100svh;
     min-height: 700px;
-
     display: flex;
     align-items: flex-end;
     justify-content: center;
-
     overflow: hidden;
-
     background: #211714;
 }
 
@@ -404,27 +286,18 @@ button {
 .hero-image img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
     object-position: center 38%;
-
     animation: heroZoom 12s ease forwards;
 }
 
 @keyframes heroZoom {
-
-    from {
-        transform: scale(1.08);
-    }
-
-    to {
-        transform: scale(1.02);
-    }
+    from { transform: scale(1.08); }
+    to { transform: scale(1.02); }
 }
 
 .hero-image::after {
     content: "";
-
     position: absolute;
     inset: 0;
 
@@ -439,61 +312,42 @@ button {
 
 .hero-content {
     position: relative;
-
     z-index: 2;
-
     text-align: center;
-
     color: #fff9f1;
-
     padding: 0 20px 65px;
 }
 
 .hero-small {
     font-family: "Montserrat", sans-serif;
-
     font-size: 9px;
-
     letter-spacing: 5px;
-
     text-transform: uppercase;
-
     margin-bottom: 20px;
 }
 
 .hero h1 {
     font-family: "Italiana", serif;
-
     font-weight: 400;
-
-    font-size:
-        clamp(56px, 10vw, 125px);
-
+    font-size: clamp(56px,10vw,125px);
     line-height: .9;
 }
 
 .hero-date {
     margin-top: 25px;
-
     font-size: 20px;
-
     letter-spacing: 4px;
 }
 
 
-/* =====================================================
-   INTRO
-===================================================== */
+/* ================= INTRO ================= */
 
 .intro {
     min-height: 80vh;
-
     padding: 100px 7%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     text-align: center;
 }
 
@@ -503,177 +357,119 @@ button {
 
 .intro h2 {
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(45px, 7vw, 90px);
-
+    font-size: clamp(45px,7vw,90px);
     font-weight: 400;
-
     line-height: 1;
 }
 
 .intro-text {
     margin-top: 35px;
-
     font-style: italic;
-
-    font-size:
-        clamp(25px, 4vw, 44px);
-
+    font-size: clamp(25px,4vw,44px);
     line-height: 1.45;
-
     color: #755c50;
 }
 
 
-/* =====================================================
-   PHOTO STORY
-===================================================== */
+/* ================= STORY ================= */
 
 .story {
     background: #402a24;
-
     color: #f8efe4;
-
-    padding:
-        120px 7% 160px;
-
+    padding: 120px 7% 160px;
     overflow: hidden;
 }
 
 .story-header {
     text-align: center;
-
     margin-bottom: 90px;
 }
 
 .story-header h2 {
     font-family: "Italiana", serif;
-
     font-weight: 400;
-
-    font-size:
-        clamp(50px, 8vw, 100px);
+    font-size: clamp(50px,8vw,100px);
 }
 
 .story-gallery {
     max-width: 1200px;
-
     height: 850px;
-
     position: relative;
-
     margin: auto;
 }
 
 .photo {
     position: absolute;
-
     overflow: hidden;
-
-    box-shadow:
-        0 35px 70px
-        rgba(0,0,0,.28);
-
+    box-shadow: 0 35px 70px rgba(0,0,0,.28);
     will-change: transform;
 }
 
 .photo img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
 .photo-one {
     width: 45%;
-
     height: 620px;
-
     left: 3%;
     top: 0;
-
     transform: rotate(-3deg);
 }
 
 .photo-two {
     width: 39%;
-
     height: 570px;
-
     right: 3%;
     top: 180px;
-
     transform: rotate(3deg);
 }
 
 .background-word {
     position: absolute;
-
     left: 50%;
     bottom: 15px;
-
     transform: translateX(-50%);
-
     white-space: nowrap;
-
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(55px, 9vw, 120px);
-
+    font-size: clamp(55px,9vw,120px);
     opacity: .13;
 }
 
 
-/* =====================================================
-   DATE
-===================================================== */
+/* ================= DATE ================= */
 
 .date-section {
     min-height: 85vh;
-
     padding: 110px 7%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     text-align: center;
-
     background: #f6f0e8;
 }
 
 .date-number {
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(100px, 18vw, 220px);
-
+    font-size: clamp(100px,18vw,220px);
     line-height: .8;
-
     font-weight: 400;
-
-    margin:
-        45px 0 35px;
+    margin: 45px 0 35px;
 }
 
 .date-month {
     font-family: "Montserrat", sans-serif;
-
     text-transform: uppercase;
-
     font-size: 10px;
-
     letter-spacing: 7px;
 }
 
 .vertical-line {
     width: 1px;
     height: 80px;
-
     margin: 45px auto;
-
     background: #836c60;
 }
 
@@ -683,53 +479,37 @@ button {
 }
 
 
-/* =====================================================
-   COUNTDOWN
-===================================================== */
+/* ================= COUNTDOWN ================= */
 
 .countdown-section {
     min-height: 72vh;
-
     padding: 110px 7%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     text-align: center;
-
     background: #402a24;
-
     color: #f8efe4;
-
     overflow: hidden;
 }
 
 .countdown-inner {
-    width: min(1050px, 100%);
+    width: min(1050px,100%);
 }
 
 .countdown-title {
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(42px, 7vw, 82px);
-
+    font-size: clamp(42px,7vw,82px);
     font-weight: 400;
-
     line-height: 1.05;
-
     margin-bottom: 65px;
 }
 
 .countdown {
     display: flex;
-
     justify-content: center;
     align-items: flex-start;
-
-    gap:
-        clamp(12px, 3vw, 35px);
+    gap: clamp(12px,3vw,35px);
 }
 
 .countdown-item {
@@ -738,94 +518,64 @@ button {
 
 .countdown-item span {
     display: block;
-
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(55px, 9vw, 105px);
-
+    font-size: clamp(55px,9vw,105px);
     line-height: 1;
 }
 
 .countdown-item small {
     display: block;
-
     margin-top: 15px;
-
     font-family: "Montserrat", sans-serif;
-
     text-transform: uppercase;
-
     font-size: 8px;
-
     letter-spacing: 3px;
-
     opacity: .65;
 }
 
 .countdown-divider {
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(45px, 7vw, 85px);
-
+    font-size: clamp(45px,7vw,85px);
     line-height: .9;
-
     opacity: .25;
 }
 
 .countdown-date {
     margin-top: 65px;
-
     font-family: "Montserrat", sans-serif;
-
     text-transform: uppercase;
-
     letter-spacing: 6px;
-
     font-size: 9px;
-
     opacity: .6;
 }
 
 .countdown-finished {
+    width: 100%;
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(45px, 8vw, 90px);
+    font-size: clamp(45px,8vw,90px);
 }
 
 
-/* =====================================================
-   LOCATION
-===================================================== */
+/* ================= LOCATION ================= */
 
 .location {
     min-height: 100vh;
-
     padding: 100px 7%;
-
     background: #d7c8b7;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
 }
 
 .location-perspective {
-    width:
-        min(1050px, 92vw);
-
+    width: min(1050px,92vw);
     perspective: 1400px;
 }
 
 .location-card {
     position: relative;
-
     min-height: 600px;
-
     overflow: hidden;
 
     background:
@@ -833,43 +583,32 @@ button {
             rgba(40,25,21,.57),
             rgba(40,25,21,.82)
         ),
-        url("IMG_5064 (1).JPG")
-        center / cover;
+        url("IMG_5064 (1).JPG") center / cover;
 
-    box-shadow:
-        0 50px 100px
-        rgba(62,39,34,.27);
+    box-shadow: 0 50px 100px rgba(62,39,34,.27);
 
     transform:
         rotateX(5deg)
         rotateY(-4deg);
 
-    transition:
-        transform .2s ease-out;
+    transition: transform .2s ease-out;
 }
 
 .location-content {
     min-height: 600px;
-
     padding: 65px;
-
     color: #fff8ee;
-
     display: flex;
     flex-direction: column;
-
     justify-content: flex-end;
 }
 
 .pin {
     position: absolute;
-
     top: 100px;
     left: 50%;
-
     width: 70px;
     height: 70px;
-
     margin-left: -35px;
 
     border:
@@ -880,7 +619,6 @@ button {
         50% 50% 50% 0;
 
     transform: rotate(-45deg);
-
     backdrop-filter: blur(8px);
 
     animation:
@@ -890,24 +628,18 @@ button {
 
 .pin::after {
     content: "";
-
     position: absolute;
-
     width: 15px;
     height: 15px;
-
     border-radius: 50%;
-
     background: #fff6ea;
-
     top: 27px;
     left: 27px;
 }
 
 @keyframes pinFloat {
 
-    0%,
-    100% {
+    0%,100% {
         transform:
             rotate(-45deg)
             translate(0,0);
@@ -922,57 +654,40 @@ button {
 
 .location h2 {
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(55px, 9vw, 100px);
-
+    font-size: clamp(55px,9vw,100px);
     font-weight: 400;
 }
 
 .address {
     font-size: 22px;
-
     margin-top: 18px;
-
     line-height: 1.5;
 }
 
 .location-time {
     margin-top: 17px;
-
     font-family: "Montserrat", sans-serif;
-
     font-size: 10px;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
 }
 
 .map-button {
     display: inline-flex;
-
     width: fit-content;
-
     margin-top: 35px;
-
-    padding:
-        16px 30px;
+    padding: 16px 30px;
 
     border:
         1px solid
         rgba(255,255,255,.7);
 
     color: white;
-
     text-decoration: none;
 
     font-family: "Montserrat", sans-serif;
-
     font-size: 9px;
-
     letter-spacing: 3px;
-
     text-transform: uppercase;
 
     transition: .3s ease;
@@ -980,73 +695,48 @@ button {
 
 .map-button:hover {
     background: white;
-
     color: #3b2924;
 }
 
 
-/* =====================================================
-   RSVP
-===================================================== */
+/* ================= RSVP ================= */
 
 .rsvp {
-    padding:
-        130px 25px;
-
+    padding: 130px 25px;
     background: #f7f2eb;
-
     display: flex;
-
     justify-content: center;
 }
 
 .rsvp-inner {
-    width:
-        min(720px, 100%);
-
+    width: min(720px,100%);
     text-align: center;
 }
 
 .rsvp h2 {
     font-family: "Italiana", serif;
-
-    font-size:
-        clamp(50px, 8vw, 90px);
-
+    font-size: clamp(50px,8vw,90px);
     font-weight: 400;
 }
 
 .rsvp-description {
-    margin:
-        20px 0 60px;
-
+    margin: 20px 0 60px;
     font-size: 22px;
-
     font-style: italic;
-
     color: #775e53;
 }
 
 .form-group {
     text-align: left;
-
     margin-bottom: 38px;
-
-    transition:
-        opacity .35s ease,
-        max-height .35s ease,
-        margin .35s ease;
 }
 
 .form-label {
     display: block;
 
     font-family: "Montserrat", sans-serif;
-
     font-size: 9px;
-
     letter-spacing: 2px;
-
     text-transform: uppercase;
 
     margin-bottom: 12px;
@@ -1056,22 +746,16 @@ button {
 .form-select {
     width: 100%;
 
-    padding:
-        12px 3px;
+    padding: 12px 3px;
 
     border: none;
-
-    border-bottom:
-        1px solid #8e796e;
-
+    border-bottom: 1px solid #8e796e;
     border-radius: 0;
 
     outline: none;
-
     background: transparent;
 
     color: #3b2924;
-
     font-size: 23px;
 }
 
@@ -1079,15 +763,9 @@ button {
     color: #a3948b;
 }
 
-
-/* RSVP option buttons */
-
 .option-grid {
     display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 
@@ -1097,7 +775,6 @@ button {
 
 .option label {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1105,13 +782,11 @@ button {
 
     padding: 18px 12px;
 
-    border:
-        1px solid #a59185;
+    border: 1px solid #a59185;
 
     cursor: pointer;
 
     text-align: center;
-
     font-size: 18px;
 
     transition:
@@ -1127,56 +802,37 @@ button {
 
 .option input:checked + label {
     background: #482e28;
-
     color: #fff9f1;
-
     border-color: #482e28;
 }
-
-
-/* side question */
 
 .side-question {
     padding-top: 8px;
 }
 
 .side-question .option label {
-    font-family: "Cormorant Garamond", serif;
-
     font-size: 20px;
 }
-
-
-/* hidden guest count */
 
 .guest-count-hidden {
     display: none;
 }
 
-
-/* submit */
-
 .submit {
     width: 100%;
-
     border: none;
 
     background: #482e28;
-
     color: #fff8ef;
 
     padding: 21px;
-
     margin-top: 10px;
 
     cursor: pointer;
 
     font-family: "Montserrat", sans-serif;
-
     text-transform: uppercase;
-
     letter-spacing: 4px;
-
     font-size: 9px;
 
     transition: .3s ease;
@@ -1186,32 +842,48 @@ button {
     background: #67463d;
 }
 
-.success {
+.submit:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.form-error {
     display: none;
 
-    padding:
-        60px 10px;
+    margin-top: 25px;
+
+    color: #8a342e;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    line-height: 1.6;
+}
+
+.success {
+    display: none;
+    padding: 60px 10px;
 }
 
 .success h3 {
     font-family: "Italiana", serif;
 
     font-size:
-        clamp(42px, 7vw, 60px);
+        clamp(42px,7vw,60px);
 
     font-weight: 400;
 }
 
 .success p {
     margin-top: 18px;
-
     font-size: 21px;
 }
 
 
-/* =====================================================
-   FINAL
-===================================================== */
+/* ================= FINAL ================= */
 
 .final {
     position: relative;
@@ -1229,7 +901,6 @@ button {
 
 .final img {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -1242,7 +913,6 @@ button {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     background:
@@ -1262,15 +932,14 @@ button {
 
     text-align: center;
 
-    padding:
-        70px 20px;
+    padding: 70px 20px;
 }
 
 .final-content h2 {
     font-family: "Italiana", serif;
 
     font-size:
-        clamp(55px, 9vw, 110px);
+        clamp(55px,9vw,110px);
 
     font-weight: 400;
 }
@@ -1296,9 +965,7 @@ button {
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* ================= MOBILE ================= */
 
 @media (max-width: 700px) {
 
@@ -1309,7 +976,6 @@ button {
     .seal {
         width: 58px;
         height: 58px;
-
         font-size: 17px;
     }
 
@@ -1322,49 +988,33 @@ button {
         letter-spacing: 3px;
     }
 
-
-    /* HERO */
-
     .hero {
         min-height: 680px;
     }
 
     .hero-image img {
-        object-position:
-            50% center;
+        object-position: 50% center;
     }
 
     .hero-content {
-        padding:
-            0 15px 55px;
+        padding: 0 15px 55px;
     }
 
     .hero h1 {
-        font-size:
-            clamp(50px, 15vw, 70px);
+        font-size: clamp(50px,15vw,70px);
     }
 
     .hero-small {
         letter-spacing: 3px;
     }
 
-
-    /* INTRO */
-
     .intro {
         min-height: 70vh;
-
-        padding:
-            90px 25px;
+        padding: 90px 25px;
     }
 
-
-    /* STORY */
-
     .story {
-        padding:
-            90px 20px
-            110px;
+        padding: 90px 20px 110px;
     }
 
     .story-header {
@@ -1377,19 +1027,14 @@ button {
 
     .photo-one {
         width: 78%;
-
         height: 490px;
-
         left: 0;
     }
 
     .photo-two {
         width: 72%;
-
         height: 460px;
-
         right: 0;
-
         top: 320px;
     }
 
@@ -1397,75 +1042,54 @@ button {
         display: none;
     }
 
-
-    /* DATE */
-
     .date-section {
         min-height: 75vh;
-
-        padding:
-            90px 25px;
+        padding: 90px 25px;
     }
-
-
-    /* COUNTDOWN */
 
     .countdown-section {
         min-height: 65vh;
-
-        padding:
-            90px 14px;
+        padding: 90px 14px;
     }
 
     .countdown-title {
         font-size: 39px;
-
         margin-bottom: 50px;
     }
 
     .countdown {
         width: 100%;
-
         gap: 5px;
     }
 
     .countdown-item {
         min-width: 0;
-
         flex: 1;
     }
 
     .countdown-item span {
         font-size:
-            clamp(34px, 10vw, 46px);
+            clamp(34px,10vw,46px);
     }
 
     .countdown-item small {
         margin-top: 10px;
-
         font-size: 6px;
-
         letter-spacing: 1px;
     }
 
     .countdown-divider {
         flex: 0 0 auto;
-
         font-size: 32px;
     }
 
     .countdown-date {
         margin-top: 50px;
-
         letter-spacing: 4px;
     }
 
-
-    /* LOCATION */
-
     .location {
-        padding:
-            80px 18px;
+        padding: 80px 18px;
     }
 
     .location-perspective {
@@ -1474,49 +1098,34 @@ button {
 
     .location-card {
         min-height: 650px;
-
         transform: none;
     }
 
     .location-content {
         min-height: 650px;
-
-        padding:
-            35px 28px;
+        padding: 35px 28px;
     }
 
     .pin {
         top: 90px;
     }
 
-
-    /* RSVP */
-
     .rsvp {
-        padding:
-            100px 20px;
+        padding: 100px 20px;
     }
 
     .option-grid {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .option label {
         min-height: 60px;
     }
 
-
-    /* FINAL */
-
     .final img {
-        object-position:
-            52% center;
+        object-position: 52% center;
     }
 }
-
-
-/* very small phones */
 
 @media (max-width: 390px) {
 
@@ -1536,35 +1145,24 @@ button {
     .countdown-divider {
         font-size: 27px;
     }
-
 }
 
 </style>
-
 </head>
 
 
 <body class="locked">
 
 
-<!-- ==================================================
-     ENVELOPE
-================================================== -->
+<!-- ================= ENVELOPE ================= -->
 
-<div
-    class="envelope-screen"
-    id="envelopeScreen"
->
+<div class="envelope-screen" id="envelopeScreen">
 
     <div class="envelope-container">
 
-        <div
-            class="envelope"
-            id="envelope"
-        >
+        <div class="envelope" id="envelope">
 
             <div class="envelope-back"></div>
-
 
             <div class="card">
 
@@ -1582,7 +1180,6 @@ button {
 
             </div>
 
-
             <div class="envelope-front"></div>
 
             <div class="envelope-flap"></div>
@@ -1593,7 +1190,6 @@ button {
 
         </div>
 
-
         <div class="tap">
             Tap to open
         </div>
@@ -1603,9 +1199,7 @@ button {
 </div>
 
 
-<!-- ==================================================
-     HERO
-================================================== -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -1617,7 +1211,6 @@ button {
         >
 
     </div>
-
 
     <div class="hero-content">
 
@@ -1638,9 +1231,7 @@ button {
 </section>
 
 
-<!-- ==================================================
-     INTRO
-================================================== -->
+<!-- ================= INTRO ================= -->
 
 <section class="intro">
 
@@ -1664,9 +1255,7 @@ button {
 </section>
 
 
-<!-- ==================================================
-     PHOTO STORY
-================================================== -->
+<!-- ================= STORY ================= -->
 
 <section class="story">
 
@@ -1682,7 +1271,6 @@ button {
 
     </div>
 
-
     <div class="story-gallery">
 
         <div class="photo photo-one">
@@ -1694,7 +1282,6 @@ button {
 
         </div>
 
-
         <div class="photo photo-two">
 
             <img
@@ -1703,7 +1290,6 @@ button {
             >
 
         </div>
-
 
         <div class="background-word">
             Forever starts here
@@ -1714,9 +1300,7 @@ button {
 </section>
 
 
-<!-- ==================================================
-     DATE
-================================================== -->
+<!-- ================= DATE ================= -->
 
 <section class="date-section">
 
@@ -1745,9 +1329,7 @@ button {
 </section>
 
 
-<!-- ==================================================
-     COUNTDOWN
-================================================== -->
+<!-- ================= COUNTDOWN ================= -->
 
 <section class="countdown-section">
 
@@ -1761,80 +1343,44 @@ button {
             Counting down to our day
         </h2>
 
-
         <div
             class="countdown"
             id="countdown"
         >
 
             <div class="countdown-item">
-
-                <span id="days">
-                    000
-                </span>
-
-                <small>
-                    Days
-                </small>
-
+                <span id="days">000</span>
+                <small>Days</small>
             </div>
-
 
             <div class="countdown-divider">
                 :
             </div>
 
-
             <div class="countdown-item">
-
-                <span id="hours">
-                    00
-                </span>
-
-                <small>
-                    Hours
-                </small>
-
+                <span id="hours">00</span>
+                <small>Hours</small>
             </div>
-
 
             <div class="countdown-divider">
                 :
             </div>
 
-
             <div class="countdown-item">
-
-                <span id="minutes">
-                    00
-                </span>
-
-                <small>
-                    Minutes
-                </small>
-
+                <span id="minutes">00</span>
+                <small>Minutes</small>
             </div>
-
 
             <div class="countdown-divider">
                 :
             </div>
 
-
             <div class="countdown-item">
-
-                <span id="seconds">
-                    00
-                </span>
-
-                <small>
-                    Seconds
-                </small>
-
+                <span id="seconds">00</span>
+                <small>Seconds</small>
             </div>
 
         </div>
-
 
         <div class="countdown-date">
             13 · 03 · 2027
@@ -1845,9 +1391,7 @@ button {
 </section>
 
 
-<!-- ==================================================
-     LOCATION
-================================================== -->
+<!-- ================= LOCATION ================= -->
 
 <section class="location">
 
@@ -1859,7 +1403,6 @@ button {
         >
 
             <div class="pin"></div>
-
 
             <div class="location-content">
 
@@ -1881,7 +1424,6 @@ button {
                     Welcome · 17:00
                 </div>
 
-
                 <a
                     class="map-button"
                     href="https://www.google.com/maps/search/?api=1&query=Adana+Restaurant+Yerevan+Yeraskh+Highway+8%2F1"
@@ -1900,16 +1442,17 @@ button {
 </section>
 
 
-<!-- ==================================================
-     RSVP
-================================================== -->
+<!-- ================= RSVP ================= -->
 
 <section class="rsvp">
 
     <div class="rsvp-inner reveal">
 
-
-        <div id="rsvpForm">
+        <form
+            id="rsvpForm"
+            action="https://formspree.io/f/mwlvgdaj"
+            method="POST"
+        >
 
             <div class="eyebrow">
                 RSVP
@@ -1939,9 +1482,11 @@ button {
                 <input
                     class="form-input"
                     id="guestName"
+                    name="Guest Name"
                     type="text"
                     placeholder="Name & surname"
                     autocomplete="name"
+                    required
                 >
 
             </div>
@@ -1955,7 +1500,6 @@ button {
                     Will you be attending?
                 </div>
 
-
                 <div class="option-grid">
 
                     <div class="option">
@@ -1963,8 +1507,9 @@ button {
                         <input
                             type="radio"
                             id="attending"
-                            name="attendance"
-                            value="attending"
+                            name="Attendance"
+                            value="Joyfully accepts"
+                            required
                         >
 
                         <label for="attending">
@@ -1979,8 +1524,8 @@ button {
                         <input
                             type="radio"
                             id="declines"
-                            name="attendance"
-                            value="declines"
+                            name="Attendance"
+                            value="Regretfully declines"
                         >
 
                         <label for="declines">
@@ -1994,14 +1539,13 @@ button {
             </div>
 
 
-            <!-- WHOSE SIDE -->
+            <!-- SIDE -->
 
             <div class="form-group side-question">
 
                 <div class="form-label">
                     Whose side are you joining us from?
                 </div>
-
 
                 <div class="option-grid">
 
@@ -2010,8 +1554,9 @@ button {
                         <input
                             type="radio"
                             id="irenSide"
-                            name="side"
-                            value="Iren"
+                            name="Side"
+                            value="Iren's side"
+                            required
                         >
 
                         <label for="irenSide">
@@ -2026,8 +1571,8 @@ button {
                         <input
                             type="radio"
                             id="robertSide"
-                            name="side"
-                            value="Robert"
+                            name="Side"
+                            value="Robert's side"
                         >
 
                         <label for="robertSide">
@@ -2041,7 +1586,7 @@ button {
             </div>
 
 
-            <!-- NUMBER OF GUESTS -->
+            <!-- GUEST COUNT -->
 
             <div
                 class="form-group"
@@ -2055,10 +1600,10 @@ button {
                     Number of guests
                 </label>
 
-
                 <select
                     class="form-select"
                     id="guestCount"
+                    name="Number of Guests"
                 >
 
                     <option value="1">
@@ -2082,15 +1627,33 @@ button {
             </div>
 
 
+            <!-- Hidden event identifier -->
+
+            <input
+                type="hidden"
+                name="Event"
+                value="Iren & Robert Engagement — 13 March 2027"
+            >
+
+
             <button
                 class="submit"
                 id="submitRSVP"
-                type="button"
+                type="submit"
             >
                 Send RSVP
             </button>
 
-        </div>
+
+            <div
+                class="form-error"
+                id="formError"
+            >
+                Something went wrong while sending your RSVP.
+                Please try again.
+            </div>
+
+        </form>
 
 
         <!-- SUCCESS -->
@@ -2109,8 +1672,7 @@ button {
             </h3>
 
             <p id="successText">
-                We can't wait to celebrate
-                this beautiful day.
+                We can't wait to celebrate with you.
             </p>
 
         </div>
@@ -2120,9 +1682,7 @@ button {
 </section>
 
 
-<!-- ==================================================
-     FINAL
-================================================== -->
+<!-- ================= FINAL ================= -->
 
 <section class="final">
 
@@ -2130,7 +1690,6 @@ button {
         src="IMG_7930 (1).JPG"
         alt="Iren and Robert"
     >
-
 
     <div class="final-content reveal">
 
@@ -2153,9 +1712,7 @@ button {
 
 <script>
 
-/* =====================================================
-   ENVELOPE
-===================================================== */
+/* ================= ENVELOPE ================= */
 
 const envelope =
     document.getElementById("envelope");
@@ -2168,14 +1725,11 @@ let invitationOpened = false;
 
 function openInvitation() {
 
-    if (invitationOpened) {
-        return;
-    }
+    if (invitationOpened) return;
 
     invitationOpened = true;
 
     envelope.classList.add("open");
-
 
     setTimeout(() => {
 
@@ -2188,7 +1742,6 @@ function openInvitation() {
         );
 
     }, 1800);
-
 }
 
 
@@ -2198,14 +1751,10 @@ envelope.addEventListener(
 );
 
 
-/* =====================================================
-   REVEAL ON SCROLL
-===================================================== */
+/* ================= REVEAL ================= */
 
 const revealElements =
-    document.querySelectorAll(
-        ".reveal"
-    );
+    document.querySelectorAll(".reveal");
 
 
 const revealObserver =
@@ -2213,21 +1762,17 @@ const revealObserver =
 
         entries => {
 
-            entries.forEach(
-                entry => {
+            entries.forEach(entry => {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+                if (entry.isIntersecting) {
 
-                        entry.target
-                            .classList
-                            .add("visible");
-
-                    }
+                    entry.target
+                        .classList
+                        .add("visible");
 
                 }
-            );
+
+            });
 
         },
 
@@ -2238,20 +1783,14 @@ const revealObserver =
     );
 
 
-revealElements.forEach(
-    element => {
+revealElements.forEach(element => {
 
-        revealObserver.observe(
-            element
-        );
+    revealObserver.observe(element);
 
-    }
-);
+});
 
 
-/* =====================================================
-   PHOTO PARALLAX
-===================================================== */
+/* ================= PHOTO PARALLAX ================= */
 
 const storySection =
     document.querySelector(".story");
@@ -2272,32 +1811,23 @@ window.addEventListener(
                 .getBoundingClientRect();
 
         if (
-            rect.top <
-            window.innerHeight
-            &&
+            rect.top < window.innerHeight &&
             rect.bottom > 0
         ) {
 
             const progress =
-                window.innerHeight
-                - rect.top;
+                window.innerHeight - rect.top;
 
             const movement =
                 progress * 0.025;
 
 
             photoOne.style.transform =
-                `
-                translateY(${movement}px)
-                rotate(-3deg)
-                `;
+                `translateY(${movement}px) rotate(-3deg)`;
 
 
             photoTwo.style.transform =
-                `
-                translateY(${-movement * .45}px)
-                rotate(3deg)
-                `;
+                `translateY(${-movement * .45}px) rotate(3deg)`;
 
         }
 
@@ -2305,11 +1835,7 @@ window.addEventListener(
 );
 
 
-/* =====================================================
-   COUNTDOWN
-   13 MARCH 2027
-   17:00 YEREVAN TIME
-===================================================== */
+/* ================= COUNTDOWN ================= */
 
 const engagementDate =
     new Date(
@@ -2381,33 +1907,24 @@ function updateCountdown() {
         );
 
 
-    document
-        .getElementById("days")
+    document.getElementById("days")
         .textContent =
-        String(days)
-        .padStart(3, "0");
+        String(days).padStart(3,"0");
 
 
-    document
-        .getElementById("hours")
+    document.getElementById("hours")
         .textContent =
-        String(hours)
-        .padStart(2, "0");
+        String(hours).padStart(2,"0");
 
 
-    document
-        .getElementById("minutes")
+    document.getElementById("minutes")
         .textContent =
-        String(minutes)
-        .padStart(2, "0");
+        String(minutes).padStart(2,"0");
 
 
-    document
-        .getElementById("seconds")
+    document.getElementById("seconds")
         .textContent =
-        String(seconds)
-        .padStart(2, "0");
-
+        String(seconds).padStart(2,"0");
 }
 
 
@@ -2419,9 +1936,7 @@ setInterval(
 );
 
 
-/* =====================================================
-   3D LOCATION
-===================================================== */
+/* ================= 3D LOCATION ================= */
 
 const locationCard =
     document.getElementById(
@@ -2429,13 +1944,11 @@ const locationCard =
     );
 
 
-const desktop =
+if (
     window.matchMedia(
         "(min-width: 701px)"
-    );
-
-
-if (desktop.matches) {
+    ).matches
+) {
 
     locationCard.addEventListener(
         "mousemove",
@@ -2445,31 +1958,23 @@ if (desktop.matches) {
                 locationCard
                     .getBoundingClientRect();
 
-
             const x =
-                event.clientX
-                - rect.left;
-
+                event.clientX - rect.left;
 
             const y =
-                event.clientY
-                - rect.top;
-
+                event.clientY - rect.top;
 
             const centerX =
                 rect.width / 2;
 
-
             const centerY =
                 rect.height / 2;
-
 
             const rotateY =
                 (
                     (x - centerX)
                     / centerX
                 ) * 5;
-
 
             const rotateX =
                 -(
@@ -2501,13 +2006,10 @@ if (desktop.matches) {
 
         }
     );
-
 }
 
 
-/* =====================================================
-   RSVP LOGIC
-===================================================== */
+/* ================= RSVP CONDITIONAL ================= */
 
 const attending =
     document.getElementById(
@@ -2524,8 +2026,11 @@ const guestCountGroup =
         "guestCountGroup"
     );
 
+const guestCount =
+    document.getElementById(
+        "guestCount"
+    );
 
-/* if guest declines, number of guests disappears */
 
 declines.addEventListener(
     "change",
@@ -2536,6 +2041,8 @@ declines.addEventListener(
             guestCountGroup.classList.add(
                 "guest-count-hidden"
             );
+
+            guestCount.disabled = true;
 
         }
 
@@ -2553,28 +2060,58 @@ attending.addEventListener(
                 "guest-count-hidden"
             );
 
+            guestCount.disabled = false;
+
         }
 
     }
 );
 
 
-/* =====================================================
-   RSVP SUBMIT
-===================================================== */
+/* ================= REAL FORMSPREE RSVP ================= */
+
+const rsvpForm =
+    document.getElementById(
+        "rsvpForm"
+    );
 
 const submitButton =
     document.getElementById(
         "submitRSVP"
     );
 
+const success =
+    document.getElementById(
+        "success"
+    );
 
-submitButton.addEventListener(
-    "click",
-    () => {
+const successTitle =
+    document.getElementById(
+        "successTitle"
+    );
+
+const successText =
+    document.getElementById(
+        "successText"
+    );
+
+const formError =
+    document.getElementById(
+        "formError"
+    );
 
 
-        const name =
+rsvpForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+        formError.style.display =
+            "none";
+
+
+        const guestName =
             document
                 .getElementById(
                     "guestName"
@@ -2585,17 +2122,17 @@ submitButton.addEventListener(
 
         const attendance =
             document.querySelector(
-                'input[name="attendance"]:checked'
+                'input[name="Attendance"]:checked'
             );
 
 
         const side =
             document.querySelector(
-                'input[name="side"]:checked'
+                'input[name="Side"]:checked'
             );
 
 
-        if (!name) {
+        if (!guestName) {
 
             alert(
                 "Please enter your name."
@@ -2625,58 +2162,90 @@ submitButton.addEventListener(
         }
 
 
-        const successTitle =
-            document.getElementById(
-                "successTitle"
-            );
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Sending...";
 
 
-        const successText =
-            document.getElementById(
-                "successText"
-            );
+        try {
+
+            const formData =
+                new FormData(rsvpForm);
 
 
-        if (
-            attendance.value ===
-            "attending"
-        ) {
+            const response =
+                await fetch(
+                    rsvpForm.action,
+                    {
+                        method: "POST",
 
-            successTitle.textContent =
-                `Thank you, ${name}.`;
+                        body: formData,
 
-            successText.textContent =
-                "We can't wait to celebrate with you.";
+                        headers: {
+                            "Accept":
+                            "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Form submission failed"
+                );
+
+            }
+
+
+            if (
+                attendance.value ===
+                "Joyfully accepts"
+            ) {
+
+                successTitle.textContent =
+                    `Thank you, ${guestName}.`;
+
+                successText.textContent =
+                    "We can't wait to celebrate with you.";
+
+            }
+
+            else {
+
+                successTitle.textContent =
+                    `Thank you, ${guestName}.`;
+
+                successText.textContent =
+                    "Thank you for letting us know. You will be missed.";
+
+            }
+
+
+            rsvpForm.style.display =
+                "none";
+
+            success.style.display =
+                "block";
+
 
         }
 
-        else {
+        catch (error) {
 
-            successTitle.textContent =
-                `Thank you, ${name}.`;
+            console.error(error);
 
-            successText.textContent =
-                "Thank you for letting us know. You will be missed.";
+            formError.style.display =
+                "block";
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                "Send RSVP";
 
         }
-
-
-        document
-            .getElementById(
-                "rsvpForm"
-            )
-            .style
-            .display =
-            "none";
-
-
-        document
-            .getElementById(
-                "success"
-            )
-            .style
-            .display =
-            "block";
 
     }
 );
@@ -2684,5 +2253,4 @@ submitButton.addEventListener(
 </script>
 
 </body>
-
 </html>
