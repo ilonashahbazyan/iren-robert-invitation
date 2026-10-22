@@ -1,1 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Iren & Robert | Engagement</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5efe7;
+    color: #3b2924;
+    font-family: "Cormorant Garamond", serif;
+    overflow-x: hidden;
+}
+
+body.locked {
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+section {
+    position: relative;
+}
+
+.eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   ENVELOPE INTRO
+===================================================== */
+
+.envelope-screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #faf6f0 0%,
+            #eee4d8 60%,
+            #ddcfc0 100%
+        );
+
+    z-index: 9999;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.envelope-screen.disappear {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.envelope-container {
+    width: min(620px, 88vw);
+    text-align: center;
+    perspective: 1500px;
+}
+
+.envelope {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1.58 / 1;
+
+    cursor: pointer;
+
+    transform-style: preserve-3d;
+
+    filter:
+        drop-shadow(
+            0 30px 30px
+            rgba(66, 42, 32, .18)
+        );
+}
+
+
+/* envelope base */
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9ded0,
+            #d9c9b7
+        );
+}
+
+
+/* invitation inside envelope */
+
+.card {
+    position: absolute;
+
+    width: 88%;
+    height: 88%;
+
+    left: 6%;
+    bottom: 5%;
+
+    z-index: 2;
+
+    background: #fbf7f0;
+
+    border:
+        1px solid
+        rgba(100, 75, 60, .15);
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    transform: translateY(13%);
+
+    transition:
+        transform 1.3s
+        cubic-bezier(.22,.8,.2,1);
+}
+
+.card-small {
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+}
+
+.card h2 {
+    font-family: "Italiana", serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(35px, 7vw, 66px);
+}
+
+.card-date {
+    margin-top: 15px;
+
+    font-style: italic;
+
+    font-size: 18px;
+}
+
+
+/* front envelope */
+
+.envelope-front {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+}
+
+.envelope-front::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #ebe1d5;
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 56%,
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+.envelope-front::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #dfd0bf;
+
+    clip-path:
+        polygon(
+            0 100%,
+            50% 48%,
+            100% 100%
+        );
+}
+
+
+/* flap */
+
+.envelope-flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 58%;
+
+    z-index: 6;
+
+    transform-origin: top;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 1s
+        cubic-bezier(.4,0,.2,1);
+}
+
+.envelope-flap::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #d7c6b3;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    backface-visibility: hidden;
+}
+
+
+/* wax seal */
+
+.seal {
+    position: absolute;
+
+    z-index: 10;
+
+    width: 72px;
+    height: 72px;
+
+    left: 50%;
+    top: 49%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #864b42,
+            #572922 72%
+        );
+
+    color: #ead0b2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Italiana", serif;
+
+    font-size: 22px;
+
+    box-shadow:
+        inset 0 0 0 3px
+        rgba(255,255,255,.08),
+
+        0 5px 12px
+        rgba(60,30,20,.3);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+
+/* opening states */
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .seal {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.6);
+}
+
+.envelope.open .card {
+    transform: translateY(-50%);
+}
+
+
+/* tap */
+
+.tap {
+    margin-top: 45px;
+
+    font-family: "Montserrat", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    font-size: 9px;
+
+    animation:
+        pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: .35;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    height: 100svh;
+
+    min-height: 700px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    background: #211714;
+}
+
+.hero-image {
+    position: absolute;
+
+    inset: 0;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center 38%;
+
+    transform: scale(1.03);
+
+    animation:
+        heroZoom 12s ease forwards;
+}
+
+@keyframes heroZoom {
+
+    from {
+        transform: scale(1.08);
+    }
+
+    to {
+        transform: scale(1.02);
+    }
+}
+
+.hero-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+
+            rgba(20,10,8,.05),
+
+            rgba(20,10,8,.05) 45%,
+
+            rgba(20,10,8,.82)
+        );
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+
+    color: #fff9f1;
+
+    padding:
+        0 20px 65px;
+}
+
+.hero-small {
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: "Italiana", serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(56px, 10vw, 125px);
+
+    line-height: .9;
+}
+
+.hero-date {
+    margin-top: 25px;
+
+    font-size: 20px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+    min-height: 80vh;
+
+    padding: 100px 7%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+.intro-content {
+    max-width: 850px;
+}
+
+.intro h2 {
+    font-family: "Italiana", serif;
+
+    font-size:
+        clamp(45px, 7vw, 90px);
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+.intro-text {
+    margin-top: 35px;
+
+    font-style: italic;
+
+    font-size:
+        clamp(25px, 4vw, 44px);
+
+    line-height: 1.45;
+
+    color: #755c50;
+}
+
+
+/* =====================================================
+   PHOTO STORY
+===================================================== */
+
+.story {
+    background: #402a24;
+
+    color: #f8efe4;
+
+    padding:
+        120px 7% 160px;
+
+    overflow: hidden;
+}
+
+.story-header {
+    text-align: center;
+
+    margin-bottom: 90px;
+}
+
+.story-header h2 {
+    font-family: "Italiana", serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(50px, 8vw, 100px);
+}
+
+.story-gallery {
+    max-width: 1200px;
+
+    height: 850px;
+
+    position: relative;
+
+    margin: auto;
+}
+
+.photo {
+    position: absolute;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 35px 70px
+        rgba(0,0,0,.28);
+
+    will-change: transform;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.photo-one {
+    width: 45%;
+
+    height: 620px;
+
+    left: 3%;
+
+    top: 0;
+
+    transform:
+        rotate(-3deg);
+}
+
+.photo-two {
+    width: 39%;
+
+    height: 570px;
+
+    right: 3%;
+
+    top: 180px;
+
+    transform:
+        rotate(3deg);
+}
+
+.background-word {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 15px;
+
+    transform:
+        translateX(-50%);
+
+    white-space: nowrap;
+
+    font-family: "Italiana", serif;
+
+    font-size:
+        clamp(55px, 9vw, 120px);
+
+    opacity: .13;
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+.date-section {
+    min-height: 85vh;
+
+    padding: 110px 7%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background: #f6f0e8;
+}
+
+.date-number {
+    font-family: "Italiana", serif;
+
+    font-size:
+        clamp(100px, 18vw, 220px);
+
+    line-height: .8;
+
+    font-weight: 400;
+
+    margin:
+        45px 0 35px;
+}
+
+.date-month {
+    font-family: "Montserrat", sans-serif;
+
+    text-transform: uppercase;
+
+    font-size: 10px;
+
+    letter-spacing: 7px;
+}
+
+.vertical-line {
+    width: 1px;
+
+    height: 80px;
+
+    margin: 45px auto;
+
+    background: #836c60;
+}
+
+.welcome {
+    font-size: 27px;
+
+    font-style: italic;
+}
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.location {
+    min-height: 100vh;
+
+    padding: 100px 7%;
+
+    background: #d7c8b7;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.location-perspective {
+    width:
+        min(1050px, 92vw);
+
+    perspective: 1400px;
+}
+
+.location-card {
+    position: relative;
+
+    min-height: 600px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            rgba(40,25,21,.57),
+            rgba(40,25,21,.82)
+        ),
+        url("IMG_5064 (1).JPG")
+        center / cover;
+
+    box-shadow:
+        0 50px 100px
+        rgba(62,39,34,.27);
+
+    transform:
+        rotateX(5deg)
+        rotateY(-4deg);
+
+    transition:
+        transform .2s ease-out;
+}
+
+.location-content {
+    min-height: 600px;
+
+    padding: 65px;
+
+    color: #fff8ee;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+}
+
+.pin {
+    position: absolute;
+
+    top: 100px;
+
+    left: 50%;
+
+    width: 70px;
+
+    height: 70px;
+
+    margin-left: -35px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.7);
+
+    border-radius:
+        50% 50% 50% 0;
+
+    transform:
+        rotate(-45deg);
+
+    backdrop-filter:
+        blur(8px);
+
+    animation:
+        pinFloat 3s
+        ease-in-out infinite;
+}
+
+.pin::after {
+    content: "";
+
+    position: absolute;
+
+    width: 15px;
+
+    height: 15px;
+
+    border-radius: 50%;
+
+    background: #fff6ea;
+
+    top: 27px;
+
+    left: 27px;
+}
+
+@keyframes pinFloat {
+
+    0%,
+    100% {
+        transform:
+            rotate(-45deg)
+            translate(0,0);
+    }
+
+    50% {
+        transform:
+            rotate(-45deg)
+            translate(7px,-7px);
+    }
+}
+
+.location h2 {
+    font-family: "Italiana", serif;
+
+    font-size:
+        clamp(55px, 9vw, 100px);
+
+    font-weight: 400;
+}
+
+.address {
+    font-size: 22px;
+
+    margin-top: 18px;
+
+    line-height: 1.5;
+}
+
+.location-time {
+    margin-top: 17px;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+.map-button {
+    display: inline-flex;
+
+    width: fit-content;
+
+    margin-top: 35px;
+
+    padding:
+        16px 30px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.7);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    transition: .3s ease;
+}
+
+.map-button:hover {
+    background: white;
+
+    color: #3b2924;
+}
+
+
+/* =====================================================
+   RSVP
+===================================================== */
+
+.rsvp {
+    padding:
+        130px 25px;
+
+    background: #f7f2eb;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.rsvp-inner {
+    width:
+        min(720px, 100%);
+
+    text-align: center;
+}
+
+.rsvp h2 {
+    font-family: "Italiana", serif;
+
+    font-size:
+        clamp(50px, 8vw, 90px);
+
+    font-weight: 400;
+}
+
+.rsvp-description {
+    margin:
+        20px 0 60px;
+
+    font-size: 22px;
+
+    font-style: italic;
+
+    color: #775e53;
+}
+
+.form-group {
+    text-align: left;
+
+    margin-bottom: 35px;
+}
+
+.form-label {
+    display: block;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+
+    padding:
+        12px 3px;
+
+    border: none;
+
+    border-bottom:
+        1px solid #8e796e;
+
+    border-radius: 0;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #3b2924;
+
+    font-size: 23px;
+}
+
+.attendance {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+}
+
+.choice input {
+    display: none;
+}
+
+.choice label {
+    display: block;
+
+    padding: 20px;
+
+    border:
+        1px solid #a59185;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    transition: .3s ease;
+}
+
+.choice input:checked + label {
+    background: #482e28;
+
+    color: #fff9f1;
+
+    border-color: #482e28;
+}
+
+.submit {
+    width: 100%;
+
+    border: none;
+
+    background: #482e28;
+
+    color: #fff8ef;
+
+    padding: 21px;
+
+    margin-top: 20px;
+
+    cursor: pointer;
+
+    font-family: "Montserrat", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    font-size: 9px;
+
+    transition: .3s ease;
+}
+
+.submit:hover {
+    background: #67463d;
+}
+
+.success {
+    display: none;
+
+    padding:
+        50px 10px;
+}
+
+.success h3 {
+    font-family: "Italiana", serif;
+
+    font-size: 50px;
+
+    font-weight: 400;
+}
+
+.success p {
+    margin-top: 15px;
+
+    font-size: 21px;
+}
+
+
+/* =====================================================
+   FINAL IMAGE
+===================================================== */
+
+.final {
+    position: relative;
+
+    height: 100svh;
+
+    min-height: 700px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+}
+
+.final img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.final::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(20,10,8,.04),
+            rgba(20,10,8,.72)
+        );
+}
+
+.final-content {
+    position: relative;
+
+    z-index: 2;
+
+    color: white;
+
+    text-align: center;
+
+    padding:
+        70px 20px;
+}
+
+.final-content h2 {
+    font-family: "Italiana", serif;
+
+    font-size:
+        clamp(55px, 9vw, 110px);
+
+    font-weight: 400;
+}
+
+.final-content p {
+    margin-top: 15px;
+
+    font-size: 23px;
+
+    font-style: italic;
+}
+
+.final-date {
+    margin-top: 28px !important;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px !important;
+
+    font-style: normal !important;
+
+    letter-spacing: 5px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .envelope-container {
+        width: 90vw;
+    }
+
+    .seal {
+        width: 58px;
+        height: 58px;
+
+        font-size: 17px;
+    }
+
+    .card h2 {
+        font-size: 34px;
+    }
+
+    .hero {
+        min-height: 680px;
+    }
+
+    .hero-image img {
+        object-position:
+            50% center;
+    }
+
+    .hero-content {
+        padding-bottom: 55px;
+    }
+
+    .intro {
+        min-height: 70vh;
+
+        padding:
+            90px 25px;
+    }
+
+    .story {
+        padding:
+            90px 20px
+            110px;
+    }
+
+    .story-header {
+        margin-bottom: 55px;
+    }
+
+    .story-gallery {
+        height: 790px;
+    }
+
+    .photo-one {
+        width: 78%;
+
+        height: 490px;
+
+        left: 0;
+    }
+
+    .photo-two {
+        width: 72%;
+
+        height: 460px;
+
+        right: 0;
+
+        top: 320px;
+    }
+
+    .background-word {
+        display: none;
+    }
+
+    .date-section {
+        min-height: 75vh;
+
+        padding:
+            90px 25px;
+    }
+
+    .location {
+        padding:
+            80px 18px;
+    }
+
+    .location-perspective {
+        width: 100%;
+    }
+
+    .location-card {
+        min-height: 650px;
+
+        transform: none;
+    }
+
+    .location-content {
+        min-height: 650px;
+
+        padding:
+            35px 28px;
+    }
+
+    .pin {
+        top: 90px;
+    }
+
+    .attendance {
+        grid-template-columns:
+            1fr;
+    }
+
+    .final img {
+        object-position:
+            52% center;
+    }
+}
+
+</style>
+</head>
+
+
+<body class="locked">
+
+
+<!-- ==================================================
+     ENVELOPE
+================================================== -->
+
+<div
+    class="envelope-screen"
+    id="envelopeScreen"
+>
+
+    <div class="envelope-container">
+
+        <div
+            class="envelope"
+            id="envelope"
+        >
+
+            <div class="envelope-back"></div>
+
+
+            <div class="card">
+
+                <div class="card-small">
+                    An invitation
+                </div>
+
+                <h2>
+                    Iren & Robert
+                </h2>
+
+                <div class="card-date">
+                    13 March 2027
+                </div>
+
+            </div>
+
+
+            <div class="envelope-front"></div>
+
+
+            <div class="envelope-flap"></div>
+
+
+            <div class="seal">
+                I&R
+            </div>
+
+        </div>
+
+
+        <div class="tap">
+            Tap to open
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero">
+
+    <div class="hero-image">
+
+        <img
+            src="IMG_7930 (1).JPG"
+            alt="Iren and Robert"
+        >
+
+    </div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            We're getting engaged
+        </div>
+
+        <h1>
+            Iren & Robert
+        </h1>
+
+        <div class="hero-date">
+            13 · 03 · 2027
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     INTRO
+================================================== -->
+
+<section class="intro">
+
+    <div class="intro-content reveal">
+
+        <div class="eyebrow">
+            Together with love
+        </div>
+
+        <h2>
+            A new chapter begins
+        </h2>
+
+        <p class="intro-text">
+            and we would love to celebrate
+            this beautiful moment with you.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO STORY
+================================================== -->
+
+<section class="story">
+
+    <div class="story-header reveal">
+
+        <div class="eyebrow">
+            Iren & Robert
+        </div>
+
+        <h2>
+            Our moment
+        </h2>
+
+    </div>
+
+
+    <div class="story-gallery">
+
+        <div class="photo photo-one">
+
+            <img
+                src="IMG_5064 (1).JPG"
+                alt="Iren and Robert"
+            >
+
+        </div>
+
+
+        <div class="photo photo-two">
+
+            <img
+                src="IMG_9647 (1).JPG"
+                alt="Iren and Robert"
+            >
+
+        </div>
+
+
+        <div class="background-word">
+            Forever starts here
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     DATE
+================================================== -->
+
+<section class="date-section">
+
+    <div class="reveal">
+
+        <div class="eyebrow">
+            Save the date
+        </div>
+
+        <div class="date-number">
+            13
+        </div>
+
+        <div class="date-month">
+            March · 2027
+        </div>
+
+        <div class="vertical-line"></div>
+
+        <div class="welcome">
+            We welcome you at 17:00
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<section class="location">
+
+    <div class="location-perspective reveal">
+
+        <div
+            class="location-card"
+            id="locationCard"
+        >
+
+            <div class="pin"></div>
+
+
+            <div class="location-content">
+
+                <div class="eyebrow">
+                    The celebration
+                </div>
+
+                <h2>
+                    Adana
+                </h2>
+
+                <div class="address">
+                    Adana Restaurant
+                    <br>
+                    Yerevan–Yeraskh Highway 8/1
+                </div>
+
+                <div class="location-time">
+                    Welcome · 17:00
+                </div>
+
+
+                <a
+                    class="map-button"
+                    href="https://www.google.com/maps/search/?api=1&query=Adana+Restaurant+Yerevan+Yeraskh+Highway+8%2F1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View location
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     RSVP
+================================================== -->
+
+<section class="rsvp">
+
+    <div class="rsvp-inner reveal">
+
+
+        <div id="rsvpForm">
+
+            <div class="eyebrow">
+                RSVP
+            </div>
+
+            <h2>
+                Will you join us?
+            </h2>
+
+            <div class="rsvp-description">
+                We would be delighted
+                to celebrate with you.
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="guestName"
+                >
+                    Your name
+                </label>
+
+                <input
+                    class="form-input"
+                    id="guestName"
+                    type="text"
+                    placeholder="Name & surname"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <div class="form-label">
+                    Will you be attending?
+                </div>
+
+
+                <div class="attendance">
+
+                    <div class="choice">
+
+                        <input
+                            type="radio"
+                            id="attending"
+                            name="attendance"
+                            value="attending"
+                        >
+
+                        <label for="attending">
+                            Joyfully accepts
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="radio"
+                            id="declines"
+                            name="attendance"
+                            value="declines"
+                        >
+
+                        <label for="declines">
+                            Regretfully declines
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="guestCount"
+                >
+                    Number of guests
+                </label>
+
+                <select
+                    class="form-select"
+                    id="guestCount"
+                >
+
+                    <option value="1">
+                        1 guest
+                    </option>
+
+                    <option value="2">
+                        2 guests
+                    </option>
+
+                    <option value="3">
+                        3 guests
+                    </option>
+
+                    <option value="4">
+                        4 guests
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="submit"
+                id="submitRSVP"
+                type="button"
+            >
+                Send RSVP
+            </button>
+
+        </div>
+
+
+        <div
+            class="success"
+            id="success"
+        >
+
+            <div class="eyebrow">
+                Thank you
+            </div>
+
+            <h3>
+                Your response has been received.
+            </h3>
+
+            <p>
+                We can't wait to celebrate
+                this beautiful day.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FINAL
+================================================== -->
+
+<section class="final">
+
+    <img
+        src="IMG_7930 (1).JPG"
+        alt="Iren and Robert"
+    >
+
+
+    <div class="final-content reveal">
+
+        <h2>
+            Iren & Robert
+        </h2>
+
+        <p>
+            We can't wait to celebrate with you.
+        </p>
+
+        <p class="final-date">
+            13 · 03 · 2027
+        </p>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   OPEN ENVELOPE
+===================================================== */
+
+const envelope =
+    document.getElementById("envelope");
+
+const envelopeScreen =
+    document.getElementById(
+        "envelopeScreen"
+    );
+
+let invitationOpened = false;
+
+
+function openInvitation() {
+
+    if (invitationOpened) {
+        return;
+    }
+
+    invitationOpened = true;
+
+    envelope.classList.add("open");
+
+
+    setTimeout(() => {
+
+        envelopeScreen.classList.add(
+            "disappear"
+        );
+
+        document.body.classList.remove(
+            "locked"
+        );
+
+    }, 1800);
+
+}
+
+
+envelope.addEventListener(
+    "click",
+    openInvitation
+);
+
+
+/* =====================================================
+   REVEAL ON SCROLL
+===================================================== */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+const revealObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add(
+                                "visible"
+                            );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+revealElements.forEach(
+    element => {
+
+        revealObserver.observe(
+            element
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PHOTO PARALLAX
+===================================================== */
+
+const storySection =
+    document.querySelector(
+        ".story"
+    );
+
+const photoOne =
+    document.querySelector(
+        ".photo-one"
+    );
+
+const photoTwo =
+    document.querySelector(
+        ".photo-two"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const rect =
+            storySection
+                .getBoundingClientRect();
+
+        if (
+            rect.top <
+            window.innerHeight
+            &&
+            rect.bottom > 0
+        ) {
+
+            const progress =
+                window.innerHeight
+                - rect.top;
+
+            const movement =
+                progress * 0.025;
+
+
+            photoOne.style.transform =
+                `
+                translateY(
+                    ${movement}px
+                )
+                rotate(-3deg)
+                `;
+
+
+            photoTwo.style.transform =
+                `
+                translateY(
+                    ${-movement * .45}px
+                )
+                rotate(3deg)
+                `;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   3D LOCATION
+===================================================== */
+
+const locationCard =
+    document.getElementById(
+        "locationCard"
+    );
+
+
+const desktop =
+    window.matchMedia(
+        "(min-width: 701px)"
+    );
+
+
+if (desktop.matches) {
+
+    locationCard.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                locationCard
+                    .getBoundingClientRect();
+
+
+            const x =
+                event.clientX
+                - rect.left;
+
+
+            const y =
+                event.clientY
+                - rect.top;
+
+
+            const centerX =
+                rect.width / 2;
+
+
+            const centerY =
+                rect.height / 2;
+
+
+            const rotateY =
+                (
+                    (x - centerX)
+                    / centerX
+                ) * 5;
+
+
+            const rotateX =
+                -(
+                    (y - centerY)
+                    / centerY
+                ) * 5;
+
+
+            locationCard.style.transform =
+                `
+                rotateX(
+                    ${rotateX}deg
+                )
+                rotateY(
+                    ${rotateY}deg
+                )
+                scale(1.015)
+                `;
+
+        }
+    );
+
+
+    locationCard.addEventListener(
+        "mouseleave",
+        () => {
+
+            locationCard.style.transform =
+                `
+                rotateX(5deg)
+                rotateY(-4deg)
+                `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RSVP DEMO
+===================================================== */
+
+const submitButton =
+    document.getElementById(
+        "submitRSVP"
+    );
+
+
+submitButton.addEventListener(
+    "click",
+    () => {
+
+        const name =
+            document
+                .getElementById(
+                    "guestName"
+                )
+                .value
+                .trim();
+
+
+        const attendance =
+            document.querySelector(
+                'input[name="attendance"]:checked'
+            );
+
+
+        if (!name) {
+
+            alert(
+                "Please enter your name."
+            );
+
+            return;
+        }
+
+
+        if (!attendance) {
+
+            alert(
+                "Please select whether you will attend."
+            );
+
+            return;
+        }
+
+
+        document
+            .getElementById(
+                "rsvpForm"
+            )
+            .style
+            .display =
+            "none";
+
+
+        document
+            .getElementById(
+                "success"
+            )
+            .style
+            .display =
+            "block";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
